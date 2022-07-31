@@ -18,7 +18,7 @@ const Profile = () => {
             <div className="row">
               <div className="col">
                 <div className="img__file">
-                  <img src={getUserDetails()["photo"]} alt="" />
+                  <img src={ProfileData.photo} alt="" />
                 </div>
               </div>
             </div>
@@ -63,6 +63,7 @@ const Profile = () => {
               <div className="col-md-4">
                 <p className="heading__text">Email Address</p>
                 <input
+                  readOnly={true}
                   className="input__"
                   type="text"
                   name=""

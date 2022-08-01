@@ -12,8 +12,8 @@ import {
 } from "../redux/stateSlice/Task-slice";
 import store from "../redux/store/Store";
 
-// const BaseURL = "http://localhost:8080/api/v1";
-const BaseURL = "https://task-manager-amit.herokuapp.com/api/v1";
+const BaseURL = "http://localhost:8080/api/v1";
+// const BaseURL = "https://task-manager-amit.herokuapp.com/api/v1";
 const AxiosToken = { headers: { token: getToken() } };
 
 export const Registration__Request__API = (
@@ -43,6 +43,7 @@ export const Registration__Request__API = (
         if (res.data["status"] === "Fail") {
           if (res.data["data"]["keyPattern"]["email"] === 1) {
             ErrorTost("Email already Exist");
+            debugger;
             return false;
           } else {
             ErrorTost("Something Went Wrong1.");
@@ -77,13 +78,17 @@ export const login__Request__API = (email, password) => {
     .then((res) => {
       store.dispatch(HideLoader());
       if (res.status === 200) {
-        SuccessTost("Login Success");
-        setToken(res.data["token"]);
-        setUserDetails(res.data["data"]);
-
-        return true;
+        if (res.data["status"] === "Success") {
+          SuccessTost("Login Success");
+          setToken(res.data["token"]);
+          setUserDetails(res.data["data"]);
+          return true;
+        } else {
+          ErrorTost("Invalid Email or Password");
+          return false;
+        }
       } else {
-        ErrorTost("Invalid Email or Password");
+        ErrorTost("Invalid Email or Password 2");
         return false;
       }
     })
@@ -237,6 +242,53 @@ export const ProfileUpdate__API = () => {
     })
     .catch((error) => {
       ErrorTost("Something Went Wrong");
+      store.dispatch(HideLoader());
+      return false;
+    });
+};
+
+export const ProfileUpdate__Request__API = (
+  email,
+  fastName,
+  lastName,
+  mobile,
+  password,
+  photo
+) => {
+  store.dispatch(ShowLoader());
+  let URL = BaseURL + "/profileUpdate";
+  let postBody = {
+    email: email,
+    fastName: fastName,
+    lastName: lastName,
+    mobile: mobile,
+    password: password,
+    photo: photo,
+  };
+  let userDetails = {
+    email: email,
+    fastName: fastName,
+    lastName: lastName,
+    mobile: mobile,
+    password: password,
+    photo: photo,
+  };
+
+  return axios
+    .post(URL, postBody, AxiosToken)
+    .then((res) => {
+      store.dispatch(HideLoader());
+      if (res.status === 200) {
+        SuccessTost("Profile Update Successful");
+        setUserDetails(userDetails);
+        return true;
+      } else {
+        ErrorTost("Something Went Wrong1");
+        return false;
+      }
+    })
+    .catch((error) => {
+      ErrorTost("Something Went Wrong2");
       store.dispatch(HideLoader());
       return false;
     });

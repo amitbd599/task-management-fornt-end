@@ -64,7 +64,10 @@ const MasterLayout = (props) => {
                         src={getUserDetails()["photo"]}
                         alt=""
                       />
-                      <h6>Amit Biswas</h6>
+                      <h6>
+                        {getUserDetails()["fastName"]}{" "}
+                        {getUserDetails()["lastName"]}
+                      </h6>
                     </div>
                     <hr />
                     <div className="text__items">

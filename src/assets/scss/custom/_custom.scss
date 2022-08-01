@@ -420,6 +420,7 @@ nav {
     .img__file {
       img {
         width: 50px;
+        height: 50px;
         border-radius: 50%;
       }
       padding-bottom: 20px;
@@ -465,6 +466,64 @@ nav {
         width: auto;
         background: var(--theme-color);
         color: #fff;
+      }
+    }
+  }
+}
+
+// SendOTP
+
+.SendOTP,
+.VerifyOTP {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .card__item {
+    width: 650px;
+    margin: auto;
+    border-radius: 10px;
+
+    box-shadow: 0px 0.5px 1.1px -2px rgba(0, 0, 0, 0.085),
+      0px 4px 9px -2px rgba(0, 0, 0, 0.17);
+    padding: 60px 65px;
+    h5 {
+      font-size: 30px;
+      padding-bottom: 20px;
+      font-weight: 700;
+    }
+    label {
+      font-size: 14px;
+    }
+    .react-code-input {
+      input {
+        padding-left: 11px !important;
+        width: 39px !important;
+        height: 41px !important;
+        font-size: 24px !important;
+      }
+    }
+    input {
+      padding: 13px 14px;
+      height: 40px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+    .my__btn {
+      margin: 10px 0;
+      padding: 6px 20px;
+      border-radius: 5px;
+      display: block;
+      width: 100%;
+      background: var(--theme-color);
+      color: #fff;
+    }
+    .footer__data {
+      text-align: center;
+      a {
+        font-size: 14px;
+        text-align: center;
       }
     }
   }

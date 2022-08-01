@@ -21,15 +21,14 @@ class FormHelper {
   SuccessTost(msg) {
     cogoToast.success(msg, { position: "bottom-center" });
   }
-  GetBase64(element) {
-    var file = element.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function () {
-      console.log("RESULT", reader.result);
-    };
-    reader.readAsDataURL(file);
+  getBase64(file) {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    });
   }
 }
-
-export const { IsEmpty, IsMobile, IsEmail, ErrorTost, SuccessTost } =
+export const { IsEmpty, IsMobile, IsEmail, ErrorTost, SuccessTost, getBase64 } =
   new FormHelper();

@@ -54,7 +54,7 @@ const Login = () => {
                 </div>
 
                 <div className="animate__animated animate__fadeInUp">
-                  <Link to="/forget">Forget Password</Link>
+                  <Link to="/send-otp">Forget Password</Link>
                 </div>
               </div>
             </div>
